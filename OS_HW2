@@ -1,0 +1,46 @@
+
+Problem 1 : alarm clock
+Definition
+기존의 time_sleep 함수에 while문을 보면 timer_elapsed(start)함수를 호출한다.
+이 함수는 timer_sleep 함수가 호출되고 얼만큼의 tick이 지났는지 반환한다.
+반환값이 timer_sleep의 인자값 ticks보다 작으면 thread_yield()를 호출한다.
+thread_yield함수를 통해 CPU점유를 반환하고 ready list의 가장 끝으로 간다.
+ticks 동안 반복된다.
+
+Algorithm
+sleep 시키는 함수와 awake 하는 함수
+sleep 시킬 때 block 상태로 두어 sleep_list 에 넣어두고
+awake 함수를 통해 다시 ready 상태로 만들어 준다.
+
+
+implementation
+
+각 스레드마다 언제 일어나야할지 정보를 가지고 있어야한다.
+(pintos/src/thread/thread.h) thread 구조체에 이 정보를 추가한다. 
+```
+struct thread{
+...
+  int64_t wake_tick;
+...
+}
+```
+
+
+
+(pintos/src/thread/thread.c)에서 sleep 시킨 스레드를 모아둘 list 구조체를 추가한다.
+또, 다음으로 가장 먼저 깨울 시각을 전달하기 위해 변수 next_wakeup 을 추가한다.
+sleep_list 를 사용하기위해 thread_init 에서 sleep_list를 초기화한다.
+
+static struct list sleep_list;
+static int64_t next_wakeup;
+..
+```
+void thread_init(void){
+...
+list_init (&sleep_list);
+...
+}```
+
+
+
+
