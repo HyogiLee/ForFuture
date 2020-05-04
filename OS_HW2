@@ -17,13 +17,11 @@ implementation
 
 각 스레드마다 언제 일어나야할지 정보를 가지고 있어야한다.
 (pintos/src/thread/thread.h) thread 구조체에 이 정보를 추가한다. 
-```
-struct thread{
+'struct thread{
 ...
   int64_t wake_tick;
 ...
-}
-```
+}'
 
 
 
