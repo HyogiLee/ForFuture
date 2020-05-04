@@ -12,17 +12,17 @@ sleep 시키는 함수와 awake 하는 함수
 sleep 시킬 때 block 상태로 두어 sleep_list 에 넣어두고
 awake 함수를 통해 다시 ready 상태로 만들어 준다.
 
-~~~
+
 implementation
-~~~
+
 각 스레드마다 언제 일어나야할지 정보를 가지고 있어야한다.
 (pintos/src/thread/thread.h) thread 구조체에 이 정보를 추가한다. 
-'struct thread{
+struct thread{
 ...
   int64_t wake_tick;
 ...
-}'
-'''<h1>This is code</h1>'''
+}
+
 
 
 (pintos/src/thread/thread.c)에서 sleep 시킨 스레드를 모아둘 list 구조체를 추가한다.
