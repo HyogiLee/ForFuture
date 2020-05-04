@@ -22,7 +22,7 @@ implementation
   int64_t wake_tick;
 ...
 }'
-<h1>This is code</h1>
+'''<h1>This is code</h1>'''
 
 
 (pintos/src/thread/thread.c)에서 sleep 시킨 스레드를 모아둘 list 구조체를 추가한다.
@@ -31,13 +31,12 @@ sleep_list 를 사용하기위해 thread_init 에서 sleep_list를 초기화한�
 
 static struct list sleep_list;
 static int64_t next_wakeup;
-..
-```
+
 void thread_init(void){
 ...
 list_init (&sleep_list);
 ...
-}```
+}
 
 
 
